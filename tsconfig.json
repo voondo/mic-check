@@ -1,14 +1,19 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
-		"declaration": true,
-		"outDir": "./lib",
-		"strict": true,
-		"esModuleInterop": true,
-		"lib": ["es6", "dom"],
-		"jsx": "react"
-	},
-	"include": ["src"],
-	"exclude": ["node_modules", "examples"]
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "esModuleInterop": true,
+    "lib": ["ES2021"],
+    "module": "ESNext",
+    "lib": ["es5", "es6", "dom"],
+    "moduleResolution": "Node",
+    "outDir": "dist/esm",
+    "target": "ES2021"
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "test"]
 }

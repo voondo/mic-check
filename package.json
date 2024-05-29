@@ -1,20 +1,23 @@
 {
 	"name": "mic-check",
-	"title": "mic-check",
 	"version": "1.1.0",
-	"description": "A wrapper for requesting audio and video permissions on JavaScript websites.",
-	"main": "lib/index.js",
-	"module": "lib/index.js",
-	"types": "lib/index.d.ts",
-	"files": [
-		"lib/**/*"
-	],
-	"scripts": {
-		"clean": "rimraf lib/",
-		"build": "npm run clean && tsc",
-		"prepare": "npm run build",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "postbuild": "esm2cjs --in dist/esm --out dist/cjs -l error"
+  },
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/gtechnologies/mic-check.git",
@@ -26,11 +29,11 @@
 		"permissions"
 	],
 	"readmeFilename": "README.md",
-	"devDependencies": {
-		"prettier": "^2.4.1",
-		"rimraf": "^5.0.1",
-		"typescript": "^4.4.3"
-	},
+  "devDependencies": {
+    "@alcalzone/esm2cjs": "^1.1.2",
+    "tsc-alias": "^1.8.8",
+    "typescript": "^4.4.3"
+  },
 	"dependencies": {
 		"bowser": "^2.11.0"
 	}
