@@ -1,4 +1,4 @@
-export declare type MediaPermissionsError = {
+export type MediaPermissionsError = {
     type?: MediaPermissionsErrorType;
     name: string;
     message?: string;
@@ -17,6 +17,6 @@ export declare enum MediaPermissionsErrorType {
  * Request camera and mic permissions from the browser.
  * @returns
  */
-export declare const requestMediaPermissions: (constraints?: MediaStreamConstraints | undefined) => Promise<boolean>;
+export declare const requestMediaPermissions: (constraints?: MediaStreamConstraints) => Promise<boolean>;
 export declare const requestAudioPermissions: () => Promise<boolean>;
 export declare const requestVideoPermissions: () => Promise<boolean>;
