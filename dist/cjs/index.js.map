@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../esm/index.js"],
+  "sourcesContent": ["export { MediaPermissionsErrorType, requestMediaPermissions, } from './requestMediaPermissions.js';\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qCAAoE;",
+  "names": []
+}

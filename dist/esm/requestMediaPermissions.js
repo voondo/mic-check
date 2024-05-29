@@ -1,11 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.requestVideoPermissions = exports.requestAudioPermissions = exports.requestMediaPermissions = exports.MediaPermissionsErrorType = void 0;
-const bowser_1 = __importDefault(require("bowser"));
-var MediaPermissionsErrorType;
+import Bowser from 'bowser';
+export var MediaPermissionsErrorType;
 (function (MediaPermissionsErrorType) {
     /** (macOS) browser does not have permission to access cam/mic */
     MediaPermissionsErrorType["SystemPermissionDenied"] = "SystemPermissionDenied";
@@ -15,15 +9,15 @@ var MediaPermissionsErrorType;
     MediaPermissionsErrorType["CouldNotStartVideoSource"] = "CouldNotStartVideoSource";
     /** all other errors */
     MediaPermissionsErrorType["Generic"] = "Generic";
-})(MediaPermissionsErrorType = exports.MediaPermissionsErrorType || (exports.MediaPermissionsErrorType = {}));
+})(MediaPermissionsErrorType || (MediaPermissionsErrorType = {}));
 /**
  * Request camera and mic permissions from the browser.
  * @returns
  */
-const requestMediaPermissions = (constraints) => {
+export const requestMediaPermissions = (constraints) => {
     return new Promise((resolve, reject) => {
         navigator.mediaDevices
-            .getUserMedia(constraints !== null && constraints !== void 0 ? constraints : { audio: true, video: true })
+            .getUserMedia(constraints ?? { audio: true, video: true })
             .then((stream) => {
             stream.getTracks().forEach((t) => {
                 t.stop();
@@ -31,7 +25,7 @@ const requestMediaPermissions = (constraints) => {
             resolve(true);
         })
             .catch((err) => {
-            const browser = bowser_1.default.getParser(window.navigator.userAgent);
+            const browser = Bowser.getParser(window.navigator.userAgent);
             const browserName = browser.getBrowserName();
             const errName = err.name;
             const errMessage = err.message;
@@ -98,8 +92,5 @@ const requestMediaPermissions = (constraints) => {
         });
     });
 };
-exports.requestMediaPermissions = requestMediaPermissions;
-const requestAudioPermissions = () => (0, exports.requestMediaPermissions)({ audio: true, video: false });
-exports.requestAudioPermissions = requestAudioPermissions;
-const requestVideoPermissions = () => (0, exports.requestMediaPermissions)({ audio: false, video: true });
-exports.requestVideoPermissions = requestVideoPermissions;
+export const requestAudioPermissions = () => requestMediaPermissions({ audio: true, video: false });
+export const requestVideoPermissions = () => requestMediaPermissions({ audio: false, video: true });
